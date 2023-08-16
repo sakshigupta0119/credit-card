@@ -3,9 +3,9 @@ package com.project.credit.card.Entities;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.http.ResponseEntity;
 
 import java.util.Objects;
-
 @Document(collection = "transactions")
 public class transactions {
     @Id
@@ -18,7 +18,8 @@ public class transactions {
     private long city_population;  // population groups
     private long amt;   // amount of spending (low value vs high value transactions)
 
-    public transactions(String gender, String category, String merchant, String city, String state, long city_population, long amt) {
+    public transactions(long trans_num, String gender, String category, String merchant, String city, String state, long city_population, long amt) {
+        this.trans_num = trans_num;
         this.gender = gender;
         this.category = category;
         this.merchant = merchant;
@@ -26,6 +27,15 @@ public class transactions {
         this.state = state;
         this.city_population = city_population;
         this.amt = amt;
+    }
+
+
+    public long getTrans_num() {
+        return trans_num;
+    }
+
+    public void setTrans_num(long trans_num) {
+        this.trans_num = trans_num;
     }
 
     public String getGender() {
@@ -89,11 +99,11 @@ public class transactions {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         transactions that = (transactions) o;
-        return city_population == that.city_population && amt == that.amt && Objects.equals(gender, that.gender) && Objects.equals(category, that.category) && Objects.equals(merchant, that.merchant) && Objects.equals(city, that.city) && Objects.equals(state, that.state);
+        return trans_num == that.trans_num && city_population == that.city_population && amt == that.amt && Objects.equals(gender, that.gender) && Objects.equals(category, that.category) && Objects.equals(merchant, that.merchant) && Objects.equals(city, that.city) && Objects.equals(state, that.state);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(gender, category, merchant, city, state, city_population, amt);
+        return Objects.hash(trans_num, gender, category, merchant, city, state, city_population, amt);
     }
 }

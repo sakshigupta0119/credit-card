@@ -1,24 +1,32 @@
 package com.project.credit.card.controller;
-
 import com.project.credit.card.Entities.transactions;
 import com.project.credit.card.dao.transactionsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import com.project.credit.card.services.transactionsServices;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/transactions")
 public class transactionsController {
+
     @Autowired
-    private transactionsRepository transactionsRepository;
+    private transactionsServices transactionsServices;
     @PostMapping("/")
-    public ResponseEntity<?> addtransactions(@RequestBody transactions transactions){
-        transactions save = this.transactionsRepository.save(transactions);
-        return ResponseEntity.ok(save);
+    public long addAllTransactions(@RequestBody transactions transactions){
+        return transactionsServices.save(transactions);
     }
 
     @GetMapping("/")
-    public ResponseEntity<?> gettransactions(@RequestBody transactions transactions){
-        return ResponseEntity.ok(this.transactionsRepository.findAll());
+    public List<transactions> getAllTransactions(@RequestBody transactions transactions){
+            return transactionsServices.findAll();
     }
+
+    @DeleteMapping("/{trans_num}")
+    public void delete(@PathVariable long trans_num){
+        transactionsServices.delete(trans_num);
+    }
+
 }
