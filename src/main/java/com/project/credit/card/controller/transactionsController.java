@@ -1,9 +1,8 @@
 package com.project.credit.card.controller;
+
 import com.project.credit.card.Entities.transactions;
-import com.project.credit.card.dao.transactionsRepository;
+import com.project.credit.card.service.TransactionsServices;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
-import com.project.credit.card.services.transactionsServices;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -13,20 +12,61 @@ import java.util.List;
 public class transactionsController {
 
     @Autowired
-    private transactionsServices transactionsServices;
-    @PostMapping("/")
-    public long addAllTransactions(@RequestBody transactions transactions){
-        return transactionsServices.save(transactions);
+    private TransactionsServices transactionService;
+
+
+//    @GetMapping("/")
+//    public List<transactions> getAllTransactions(@RequestBody transactions transactions){
+//            return transactionService.findAll();
+//    }
+
+    @GetMapping("/city/{city}")
+    public List<transactions> getTransactionsByCity(@PathVariable String city) {
+        List<transactions> temp = this.transactionService.getTransactionsByCity(city);
+        System.out.println(temp);
+        return temp;
     }
 
-    @GetMapping("/")
-    public List<transactions> getAllTransactions(@RequestBody transactions transactions){
-            return transactionsServices.findAll();
+    @GetMapping("/merchant/{merchant}")
+    public List<transactions> getTransactionByMerchant(@PathVariable String merchant) {
+        List<transactions> temp = this.transactionService.getTransactionByMerchant(merchant);
+        System.out.println(temp);
+        return temp;
     }
 
-    @DeleteMapping("/{trans_num}")
-    public void delete(@PathVariable long trans_num){
-        transactionsServices.delete(trans_num);
+    @GetMapping("/state/{state}")
+    public List<transactions> getTransactionsByState(@PathVariable String state) {
+        List<transactions> temp = this.transactionService.getTransactionsByState(state);
+        System.out.println(temp);
+        return temp;
     }
 
+    @GetMapping("/job/{job}")
+    public List<transactions> getTransactionsByJob(@PathVariable String job) {
+        List<transactions> temp = this.transactionService.getTransactionsByJob(job);
+        System.out.println(temp);
+        return temp;
+    }
+
+    //    By spending category
+    @GetMapping("/category/{category}")
+    public List<transactions> getTransactionsBySpendingCategory(@PathVariable String category) {
+        List<transactions> temp = this.transactionService.getTransactionsBySpendingCategory(category);
+        System.out.println(temp);
+        return temp;
+    }
 }
+
+//    By amount of spending (low value vs high value transactions)
+//    @GetMapping("spendingRange/{spendingRange}")
+//    public long getTransactionsInRange(@PathVariable Double low , Double high ){
+//        List<transactions> temp = this.transactionService.getAllTransactionInRange(low,high);
+//        long count = temp.size();
+//        return count;
+//    }
+
+
+//    @DeleteMapping("/{trans_num}")
+//    public void delete(@PathVariable long trans_num){
+//        transactionService.delete(trans_num);
+//    }

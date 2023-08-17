@@ -7,5 +7,6 @@ import java.util.List;
 
 public interface UserRepository extends MongoRepository<Users , Long> {
 
-    List<Users> findUsersByGender(String gender);
+
+    List<Users> getAllTransactionByGender(String gender);
 }

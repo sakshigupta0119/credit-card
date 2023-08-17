@@ -3,7 +3,6 @@ package com.project.credit.card.Entities;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
-import org.springframework.http.ResponseEntity;
 
 import java.util.Objects;
 @Document(collection = "transactions")
@@ -16,9 +15,9 @@ public class transactions {
     private String city;  // city
     private String state;  // state
     private long city_population;  // population groups
-    private long amt;   // amount of spending (low value vs high value transactions)
+    private Double amt;   // amount of spending (low value vs high value transactions)
 
-    public transactions(long trans_num, String gender, String category, String merchant, String city, String state, long city_population, long amt) {
+    public transactions(long trans_num, String gender, String category, String merchant, String city, String state, long city_population, Double amt) {
         this.trans_num = trans_num;
         this.gender = gender;
         this.category = category;
@@ -86,11 +85,11 @@ public class transactions {
         this.city_population = city_population;
     }
 
-    public long getAmt() {
+    public Double getAmt() {
         return amt;
     }
 
-    public void setAmt(long amt) {
+    public void setAmt(Double amt) {
         this.amt = amt;
     }
 

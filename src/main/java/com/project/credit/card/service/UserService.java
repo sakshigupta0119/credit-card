@@ -34,10 +34,8 @@ public class UserService {
                 .orElseThrow(()->new RecordNotFoundException("user with "+userId+" does not exist"));
     }
 
-    public List<Users> getAllUsersByGender(String gender) {
-        return this.repository.findUsersByGender(gender);
-    }
 
+    //Deleting a user
     public void deleteUser(long userId) throws RecordNotFoundException {
 
         if(!repository.existsById(userId))
@@ -45,4 +43,7 @@ public class UserService {
         repository.deleteById(userId);
     }
 
+    public List<Users> getTransactionsByGender(String gender) {
+        return repository.getAllTransactionByGender(gender);
+    }
 }
