@@ -1,12 +1,12 @@
 package com.project.credit.card.dao;
 
-import com.project.credit.card.Entities.Users;
+import com.project.credit.card.Entities.customers;
 import org.springframework.data.mongodb.repository.MongoRepository;
 
 import java.util.List;
 
-public interface UserRepository extends MongoRepository<Users , Long> {
+public interface UserRepository extends MongoRepository<customers, Long> {
 
 
-    List<Users> getAllTransactionByGender(String gender);
+    List<customers> getAllTransactionByGender(String gender);
 }
