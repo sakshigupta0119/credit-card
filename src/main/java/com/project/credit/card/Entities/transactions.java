@@ -17,15 +17,18 @@ public class transactions {
     private long city_population;  // population groups
     private Double amt;   // amount of spending (low value vs high value transactions)
 
-    public transactions(long trans_num, String gender, String category, String merchant, String city, String state, long city_population, Double amt) {
-        this.trans_num = trans_num;
-        this.gender = gender;
-        this.category = category;
-        this.merchant = merchant;
-        this.city = city;
-        this.state = state;
-        this.city_population = city_population;
-        this.amt = amt;
+//    public transactions(long trans_num, String gender, String category, String merchant, String city, String state, long city_population, Double amt) {
+//        this.trans_num = trans_num;
+//        this.gender = gender;
+//        this.category = category;
+//        this.merchant = merchant;
+//        this.city = city;
+//        this.state = state;
+//        this.city_population = city_population;
+//        this.amt = amt;
+//    }
+    public transactions(long trans_num){
+        this.trans_num =trans_num;
     }
 
 
