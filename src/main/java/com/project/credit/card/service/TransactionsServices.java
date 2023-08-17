@@ -1,7 +1,7 @@
 package com.project.credit.card.service;
 
-import com.project.credit.card.Entities.transactions;
-import com.project.credit.card.dao.transactionsRepository;
+import com.project.credit.card.entities.transactions;
+import com.project.credit.card.repositories.TransactionsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -10,7 +10,7 @@ import java.util.List;
 @Service
 public class TransactionsServices {
 @Autowired
-    private transactionsRepository repo;
+    private TransactionsRepository repo;
     @Autowired
     private TransactionMongoTemplate dao;
 

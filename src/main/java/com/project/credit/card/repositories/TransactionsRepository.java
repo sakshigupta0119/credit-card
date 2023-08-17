@@ -1,11 +1,11 @@
-package com.project.credit.card.dao;
+package com.project.credit.card.repositories;
 
-import com.project.credit.card.Entities.transactions;
+import com.project.credit.card.entities.transactions;
 import org.springframework.data.mongodb.repository.MongoRepository;
 
 import java.util.List;
 
-public interface transactionsRepository extends MongoRepository<transactions, Long> {
+public interface TransactionsRepository extends MongoRepository<transactions, Long> {
 
     List<transactions> getAllTransactionByCity();
 

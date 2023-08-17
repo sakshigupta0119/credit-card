@@ -1,6 +1,6 @@
 package com.project.credit.card.utility;
 
-public enum Transactionstatus {
+public enum TransactionStatus {
     PENDING,
     APPROVED,
     DECLINED

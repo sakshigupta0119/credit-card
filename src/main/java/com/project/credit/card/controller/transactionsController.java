@@ -1,6 +1,6 @@
 package com.project.credit.card.controller;
 
-import com.project.credit.card.Entities.transactions;
+import com.project.credit.card.entities.transactions;
 import com.project.credit.card.service.TransactionsServices;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -57,16 +57,3 @@ public class transactionsController {
     }
 }
 
-//    By amount of spending (low value vs high value transactions)
-//    @GetMapping("spendingRange/{spendingRange}")
-//    public long getTransactionsInRange(@PathVariable Double low , Double high ){
-//        List<transactions> temp = this.transactionService.getAllTransactionInRange(low,high);
-//        long count = temp.size();
-//        return count;
-//    }
-
-
-//    @DeleteMapping("/{trans_num}")
-//    public void delete(@PathVariable long trans_num){
-//        transactionService.delete(trans_num);
-//    }

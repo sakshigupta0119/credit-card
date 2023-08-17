@@ -1,7 +1,7 @@
 package com.project.credit.card.service;
 
-import com.project.credit.card.Entities.customers;
-import com.project.credit.card.dao.CustomerRepository;
+import com.project.credit.card.entities.customers;
+import com.project.credit.card.repositories.CustomerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -10,40 +10,38 @@ import java.util.List;
 
 @Service
 public class CustomerServices implements CustomerServicesImplementation {
-    private  CustomerRepository customerRepo;
+    private final CustomerRepository customerRepository;
     @Autowired
-    public CustomerServices(CustomerRepository customerRepo){
-        this.customerRepo =customerRepo;
+    public CustomerServices(CustomerRepository customerRepository){
+        this.customerRepository =customerRepository;
     }
 
-    public List<customers> getCustomerByGender(String _gender)
+    public List<customers> getCustomerByGender(String gender)
     {
-        System.out.println("In customer service");
-        return customerRepo.findByGender(_gender);
+        return customerRepository.findByGender(gender);
     }
 
-    public List<customers> getCustomerByProfession(String _profession)
+    public List<customers> getCustomerByOccupation(String occupation)
     {
-        return customerRepo.findByProfession(_profession);
+        return customerRepository.findByOccupation(occupation);
     }
 
     public customers createCustomer(customers customer)
     {
-        return customerRepo.save(customer);
+        return customerRepository.save(customer);
     }
 
     public customers updateCustomer(String id, customers customer) {
-        System.out.println("Printing from Service Class" + id + customer);
-        customers existingCustomer = customerRepo.findByCustomerId(id);
-        System.out.println("old object"+existingCustomer);
+
+        customers existingCustomer = customerRepository.findByCustomerId(id);
+        System.out.println("old customer: "+existingCustomer);
         if (existingCustomer != null) {
-//            Customer existingCustomer= existingCustomerOptional.get();
             existingCustomer.setFirst(customer.getFirst());
             existingCustomer.setLast(customer.getLast());
             existingCustomer.setGender(customer.getGender());
             existingCustomer.setJob(customer.getJob());
-            System.out.println("*************"+existingCustomer);
-            customerRepo.save(existingCustomer);
+            System.out.println("updated customer: "+existingCustomer);
+            customerRepository.save(existingCustomer);
         }
 
         return existingCustomer;
@@ -52,10 +50,10 @@ public class CustomerServices implements CustomerServicesImplementation {
 
     public boolean deleteCustomer(String id)
     {
-        customers customerOptional=customerRepo.findByCustomerId(id);
+        customers customerOptional= customerRepository.findByCustomerId(id);
         if(customerOptional !=null)
         {
-            customerRepo.deleteByCustomerId(id);
+            customerRepository.deleteByCustomerId(id);
             return true;
         }
         else {

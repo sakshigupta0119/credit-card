@@ -1,4 +1,4 @@
-package com.project.credit.card.Entities;
+package com.project.credit.card.entities;
 // An entity to view the spending history of customer.
 
 import org.springframework.data.annotation.Id;
