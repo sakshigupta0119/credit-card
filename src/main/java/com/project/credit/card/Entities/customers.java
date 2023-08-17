@@ -2,11 +2,12 @@ package com.project.credit.card.Entities;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.Field;
 
 import java.util.Date;
 
 @Document
-public class Users {
+public class customers {
 
     @Id
     private long customerId;
@@ -17,9 +18,10 @@ public class Users {
     private String job;
     private Date dob;
 
-    public Users() {
+    public customers() {
     }
-
+    @Field("job")
+    private String occupation;
     public long getCustomerId() {
         return customerId;
     }
@@ -36,8 +38,8 @@ public class Users {
         this.dob = dob;
     }
 
-    public void setJob(String job) {
-        this.job = job;
+    public void setJob(String occupation) {
+        this.occupation = occupation;
     }
 
     public String getGender() {
