@@ -2,6 +2,7 @@ package com.project.credit.card.dao;
 
 import com.project.credit.card.dto.*;
 import org.springframework.data.domain.Sort;
+import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.TransactionsMongo;
 import com.project.credit.card.entities.transactions;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,16 +20,16 @@ import static org.springframework.data.mongodb.core.aggregation.Aggregation.*;
 @Repository
 public class TransactionsMongoDB {
     @Autowired
-    private TransactionsMongo transactionsMongo;
+    private MongoTemplate mongoTemplate;
 
     public List<transactions> getAllTransactions(){
-        return transactionsMongo.findAll(transactions.class);
+        return mongoTemplate.findAll(transactions.class);
     }
 
     public transactions getTransactionsById(String transId){
         Query query = new Query();
         query.addCriteria(Criteria.where("id").is(transId));
-        return transactionsMongo.findOne(query, transactions.class);
+        return mongoTemplate.findOne(query, transactions.class);
     }
 
     public List<SpendByGender> getSpendHistoryByGender(){
@@ -42,12 +43,13 @@ public class TransactionsMongoDB {
         SortOperation sortByGender = sort(Sort.by(Sort.Direction.DESC,"totalAmount"));
 
         Aggregation aggregation = newAggregation(allGenderCategory,groupByGender,sortByGender,includes);
-        AggregationResults<SpendByGender> groupResults = transactionsMongo
+        AggregationResults<SpendByGender> groupResults = mongoTemplate
                 .aggregate(aggregation, "transactions", SpendByGender.class);
         List<SpendByGender> result = groupResults.getMappedResults();
         return result;
 
     }
+
     public List<SpendByCategory> getSpendingHistoryByCategory() {
         System.out.println("In DAO");
         GroupOperation groupByCategory = group("category").sum("amt")
@@ -62,7 +64,7 @@ public class TransactionsMongoDB {
         System.out.println("Sort operation created");
 
         Aggregation aggregation = newAggregation(allCategories,groupByCategory,sortByCategory,includes);
-        AggregationResults<SpendByCategory> groupResults = transactionsMongo
+        AggregationResults<SpendByCategory> groupResults = mongoTemplate
                 .aggregate(aggregation, "transactions", SpendByCategory.class);
         System.out.println("Aggregation operation created");
 
@@ -86,7 +88,7 @@ public class TransactionsMongoDB {
         SortOperation sortByMerchant = sort(Sort.by(Sort.Direction.DESC,"totalAmount"));
 
         Aggregation aggregation = newAggregation(allMerchants,groupByMerchant,sortByMerchant,includes);
-        AggregationResults<SpendByMerchant> groupResults = transactionsMongo
+        AggregationResults<SpendByMerchant> groupResults = mongoTemplate
                 .aggregate(aggregation, "transactions", SpendByMerchant.class);
         List<SpendByMerchant> result = groupResults.getMappedResults();
         return result;
@@ -104,7 +106,7 @@ public class TransactionsMongoDB {
         SortOperation sortByCity = sort(Sort.by(Sort.Direction.DESC,"total_amount"));
 
         Aggregation aggregation = newAggregation(allCities,groupByCity,sortByCity,includes);
-        AggregationResults<SpendByCity> groupResults = transactionsMongo
+        AggregationResults<SpendByCity> groupResults = mongoTemplate
                 .aggregate(aggregation, "transactions", SpendByCity.class);
         List<SpendByCity> result = groupResults.getMappedResults();
         return result;
@@ -122,7 +124,7 @@ public class TransactionsMongoDB {
         SortOperation sortByState = sort(Sort.by(Sort.Direction.DESC,"total_amount"));
 
         Aggregation aggregation = newAggregation(allStates,groupByState,sortByState,includes);
-        AggregationResults<SpendByState> groupResults = transactionsMongo
+        AggregationResults<SpendByState> groupResults = mongoTemplate
                 .aggregate(aggregation, "transactions", SpendByState.class);
         List<SpendByState> result = groupResults.getMappedResults();
         return result;
@@ -140,7 +142,7 @@ public class TransactionsMongoDB {
         SortOperation sortByJob = sort(Sort.by(Sort.Direction.DESC,"total_amount"));
 
         Aggregation aggregation = newAggregation(allJobs,groupByJob,sortByJob,includes);
-        AggregationResults<SpendByOccupation> groupResults = transactionsMongo
+        AggregationResults<SpendByOccupation> groupResults = mongoTemplate
                 .aggregate(aggregation, "transactions", SpendByOccupation.class);
         List<SpendByOccupation> result = groupResults.getMappedResults();
         return result;
@@ -152,7 +154,7 @@ public class TransactionsMongoDB {
 
         Aggregation aggregation = newAggregation(matchLowValue, transactionsMongo);
 
-        return transactionsMongo.aggregate(aggregation, "transactions", transactions.class).getMappedResults();
+        return mongoTemplate.aggregate(aggregation, "transactions", transactions.class).getMappedResults();
     }
 
     public List<transactions> getHighValueTransactions() {
@@ -161,7 +163,7 @@ public class TransactionsMongoDB {
 
         Aggregation aggregation = Aggregation.newAggregation(matchHighValue, sortByAmountDescending);
 
-        return transactionsMongo.aggregate(aggregation, "transactions", transactions.class).getMappedResults();
+        return mongoTemplate.aggregate(aggregation, "transactions", transactions.class).getMappedResults();
     }
 
 }
