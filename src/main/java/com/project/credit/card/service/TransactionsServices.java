@@ -12,7 +12,7 @@ import java.util.List;
 @Service
 public class TransactionsServices {
 @Autowired
-    private TransactionsRepository repo;
+    private static TransactionsRepository repo;
     @Autowired
     private TransactionsMongoDB dao;
 
@@ -55,5 +55,24 @@ public class TransactionsServices {
         this.repo =_transactionRepo;
     }
 
+
+    public static List<transactions> getTransactionsByUserId(String _userId)
+    {
+        return repo.findByUserId(_userId);
+    }
+    public List<transactions> getTransactionsByMerchant(String _merchant)
+    {
+        return repo.findByMerchant(_merchant);
+    }
+
+    public List<transactions> getTransactionsBySpendingCategory(String _spendingCategory)
+    {
+        return repo.findBySpendingCategory(_spendingCategory);
+    }
+
+    public transactions createTransaction(transactions transaction)
+    {
+        return repo.save(transaction);
+    }
 
 }

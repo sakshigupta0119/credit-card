@@ -7,15 +7,21 @@ import java.util.List;
 
 public interface TransactionsRepository extends MongoRepository<transactions, Long> {
 
-    List<transactions> getAllTransactionByCity();
+  //  List<transactions> getAllTransactionByCity();
 
-    List<transactions> getAllTransactionsByMerchant();
+//    List<transactions> getAllTransactionsByMerchant();
+//
+//    List<transactions> getAllTransactionsByState();
+//
+//    List<transactions> getAllTransactionsByJob();
+//
+//    List<transactions> getAllTransactionsBySpendingCategory();
 
-    List<transactions> getAllTransactionsByState();
+    List<transactions> findBySpendingCategory(String spendingCategory);
 
-    List<transactions> getAllTransactionsByJob();
+    List<transactions> findByMerchant(String merchant);
 
-    List<transactions> getAllTransactionsBySpendingCategory();
+    List<transactions> findByUserId(String userId);
 
 //    Long TransactionInRange(Double lowAmt, Double highAmt);
 }
