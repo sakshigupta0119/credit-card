@@ -1,5 +1,5 @@
 spring:
   data:
     mongodb:
-      uri: mongodb+srv://2001harshagarwal:<hA@123456>@cluster1.gsngyjq.mongodb.net/
-      database: credit-card
+      uri: mongodb+srv://shalini06:shalini12345@shalini-neueda.rcbrfpu.mongodb.net/?retryWrites=true&w=majority
+      database: shalini-neueda

@@ -4,12 +4,12 @@ import com.project.credit.card.repositories.CustomerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import springfox.documentation.swagger2.annotations.EnableSwagger2;
+//import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 import java.util.logging.Logger;
 
 @SpringBootApplication
-@EnableSwagger2
+//@EnableSwagger2
 public class CreditCardApplication {
 	Logger logger = Logger.getLogger(CreditCardApplication.class.getSimpleName());
 
