@@ -1,10 +1,12 @@
 package com.project.credit.card;
+
 import com.project.credit.card.repositories.CustomerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import java.util.logging.Logger;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
+
+import java.util.logging.Logger;
 
 @SpringBootApplication
 @EnableSwagger2

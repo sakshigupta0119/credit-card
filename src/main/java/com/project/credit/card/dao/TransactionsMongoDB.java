@@ -1,19 +1,16 @@
 package com.project.credit.card.dao;
 
 import com.project.credit.card.dto.*;
-import org.springframework.data.domain.Sort;
-import org.springframework.data.mongodb.core.MongoTemplate;
-import org.springframework.data.mongodb.core.TransactionsMongo;
 import com.project.credit.card.entities.Transactions;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.aggregation.*;
 import org.springframework.data.mongodb.core.query.Criteria;
-import org.springframework.stereotype.Repository;
 import org.springframework.data.mongodb.core.query.Query;
+import org.springframework.stereotype.Repository;
 
-import static org.springframework.data.mongodb.core.aggregation.Aggregation.group;
 import java.util.List;
-import static com.mongodb.client.model.Aggregates.match;
 import static org.springframework.data.mongodb.core.aggregation.Aggregation.*;
 
 @Repository
