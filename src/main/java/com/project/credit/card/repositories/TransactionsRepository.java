@@ -1,11 +1,11 @@
 package com.project.credit.card.repositories;
 
-import com.project.credit.card.entities.transactions;
+import com.project.credit.card.entities.Transactions;
 import org.springframework.data.mongodb.repository.MongoRepository;
 
 import java.util.List;
 
-public interface TransactionsRepository extends MongoRepository<transactions, Long> {
+public interface TransactionsRepository extends MongoRepository<Transactions, Long> {
 
   //  List<transactions> getAllTransactionByCity();
 
@@ -17,11 +17,11 @@ public interface TransactionsRepository extends MongoRepository<transactions, Lo
 //
 //    List<transactions> getAllTransactionsBySpendingCategory();
 
-    List<transactions> findBySpendingCategory(String spendingCategory);
+    List<Transactions> findBySpendingCategory(String spendingCategory);
 
-    List<transactions> findByMerchant(String merchant);
+    List<Transactions> findByMerchant(String merchant);
 
-    List<transactions> findByUserId(String userId);
+    List<Transactions> findByUserId(String userId);
 
 //    Long TransactionInRange(Double lowAmt, Double highAmt);
 }

@@ -4,10 +4,10 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 @Document
-public class customers {
+public class Customers {
 
     @Id
     private long customerId;
@@ -16,12 +16,26 @@ public class customers {
     private String last;
     private String gender;
     private String job;
-    private Date dob;
+    private LocalDate dob;
 
-    public customers() {
+    public Customers(long customerId, String id, String first, String last, String gender, String job, LocalDate dob) {
+        this.customerId = customerId;
+        this.id = id;
+        this.first = first;
+        this.last = last;
+        this.gender = gender;
+        this.job = job;
+        this.dob = dob;
+//        this.occupation = occupation;
+    }
+
+    public Customers() {
     }
     @Field("job")
     private String occupation;
+
+
+
     public long getCustomerId() {
         return customerId;
     }
@@ -30,11 +44,11 @@ public class customers {
         return job;
     }
 
-    public Date getDob() {
+    public LocalDate getDob() {
         return dob;
     }
 
-    public void setDob(Date dob) {
+    public void setDob(LocalDate dob) {
         this.dob = dob;
     }
 

@@ -4,7 +4,7 @@ import com.project.credit.card.dto.*;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.TransactionsMongo;
-import com.project.credit.card.entities.transactions;
+import com.project.credit.card.entities.Transactions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.aggregation.*;
 import org.springframework.data.mongodb.core.query.Criteria;
@@ -14,7 +14,6 @@ import org.springframework.data.mongodb.core.query.Query;
 import static org.springframework.data.mongodb.core.aggregation.Aggregation.group;
 import java.util.List;
 import static com.mongodb.client.model.Aggregates.match;
-import static com.mongodb.client.model.Aggregates.sort;
 import static org.springframework.data.mongodb.core.aggregation.Aggregation.*;
 
 @Repository
@@ -22,14 +21,14 @@ public class TransactionsMongoDB {
     @Autowired
     private MongoTemplate mongoTemplate;
 
-    public List<transactions> getAllTransactions(){
-        return mongoTemplate.findAll(transactions.class);
+    public List<Transactions> getAllTransactions(){
+        return mongoTemplate.findAll(Transactions.class);
     }
 
-    public transactions getTransactionsById(String transId){
+    public Transactions getTransactionsById(String transId){
         Query query = new Query();
         query.addCriteria(Criteria.where("id").is(transId));
-        return mongoTemplate.findOne(query, transactions.class);
+        return mongoTemplate.findOne(query, Transactions.class);
     }
 
     public List<SpendByGender> getSpendHistoryByGender(){
@@ -148,22 +147,22 @@ public class TransactionsMongoDB {
         return result;
     }
 
-    public List<transactions> getLowValueTransactions() {
+    public List<Transactions> getLowValueTransactions() {
         MatchOperation matchLowValue = Aggregation.match(Criteria.where("amt").lte(100));
         SortOperation transactionsMongo = Aggregation.sort(Sort.by("amt"));
 
         Aggregation aggregation = newAggregation(matchLowValue, transactionsMongo);
 
-        return mongoTemplate.aggregate(aggregation, "transactions", transactions.class).getMappedResults();
+        return mongoTemplate.aggregate(aggregation, "transactions", Transactions.class).getMappedResults();
     }
 
-    public List<transactions> getHighValueTransactions() {
+    public List<Transactions> getHighValueTransactions() {
         MatchOperation matchHighValue = Aggregation.match(Criteria.where("amt").gt(100)); // Adjust the threshold as needed
         SortOperation sortByAmountDescending = Aggregation.sort(Sort.by(Sort.Direction.DESC, "amt"));
 
         Aggregation aggregation = Aggregation.newAggregation(matchHighValue, sortByAmountDescending);
 
-        return mongoTemplate.aggregate(aggregation, "transactions", transactions.class).getMappedResults();
+        return mongoTemplate.aggregate(aggregation, "transactions", Transactions.class).getMappedResults();
     }
 
 }

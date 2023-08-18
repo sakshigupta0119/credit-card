@@ -1,19 +1,19 @@
 package com.project.credit.card.repositories;
 
-import com.project.credit.card.entities.customers;
+import com.project.credit.card.entities.Customers;
 import org.springframework.data.mongodb.repository.MongoRepository;
 
 import java.util.List;
 
-public interface CustomerRepository extends MongoRepository<customers, Long> {
+public interface CustomerRepository extends MongoRepository<Customers, Long> {
 
 
 
-    List<customers> findByGender(String gender);
+    List<Customers> findByGender(String gender);
 
-    List<customers> findByOccupation(String occupation);
+    List<Customers> findByOccupation(String occupation);
 
-    customers findByCustomerId(String id);
+    Customers findByCustomerId(String id);
 
     void deleteByCustomerId(String id);
 }

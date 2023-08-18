@@ -1,7 +1,7 @@
 package com.project.credit.card.service;
 
 import com.project.credit.card.dao.TransactionsMongoDB;
-import com.project.credit.card.entities.transactions;
+import com.project.credit.card.entities.Transactions;
 import com.project.credit.card.repositories.TransactionsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -11,7 +11,7 @@ import java.util.List;
 
 @Service
 public class TransactionsServices {
-@Autowired
+    @Autowired
     private static TransactionsRepository repo;
     @Autowired
     private TransactionsMongoDB dao;
@@ -41,11 +41,11 @@ public class TransactionsServices {
         return dao.getSpendingHistoryByProfession();
     }
 
-    public List<transactions> getLowValueTransactions(){
+    public List<Transactions> getLowValueTransactions(){
         return dao.getLowValueTransactions();
     }
 
-    public List<transactions> getHighValueTransactions(){
+    public List<Transactions> getHighValueTransactions(){
         return dao.getHighValueTransactions();
     }
 
@@ -56,23 +56,24 @@ public class TransactionsServices {
     }
 
 
-    public static List<transactions> getTransactionsByUserId(String _userId)
+    public static List<Transactions> getTransactionsByUserId(String _userId)
     {
         return repo.findByUserId(_userId);
     }
-    public List<transactions> getTransactionsByMerchant(String _merchant)
+    public List<Transactions> getTransactionsByMerchant(String _merchant)
     {
         return repo.findByMerchant(_merchant);
     }
 
-    public List<transactions> getTransactionsBySpendingCategory(String _spendingCategory)
+    public List<Transactions> getTransactionsBySpendingCategory(String _spendingCategory)
     {
         return repo.findBySpendingCategory(_spendingCategory);
     }
 
-    public transactions createTransaction(transactions transaction)
+    public Transactions createTransaction(Transactions transaction)
     {
         return repo.save(transaction);
     }
 
 }
+

@@ -1,6 +1,6 @@
 package com.project.credit.card.service;
 
-import com.project.credit.card.entities.customers;
+import com.project.credit.card.entities.Customers;
 import com.project.credit.card.repositories.CustomerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,24 +16,24 @@ public class CustomerServices implements CustomerServicesImplementation {
         this.customerRepository =customerRepository;
     }
 
-    public List<customers> getCustomerByGender(String gender)
+    public List<Customers> getCustomerByGender(String gender)
     {
         return customerRepository.findByGender(gender);
     }
 
-    public List<customers> getCustomerByOccupation(String occupation)
+    public List<Customers> getCustomerByOccupation(String occupation)
     {
         return customerRepository.findByOccupation(occupation);
     }
 
-    public customers createCustomer(customers customer)
+    public Customers createCustomer(Customers customer)
     {
         return customerRepository.save(customer);
     }
 
-    public customers updateCustomer(String id, customers customer) {
+    public Customers updateCustomer(String id, Customers customer) {
 
-        customers existingCustomer = customerRepository.findByCustomerId(id);
+        Customers existingCustomer = customerRepository.findByCustomerId(id);
         System.out.println("old customer: "+existingCustomer);
         if (existingCustomer != null) {
             existingCustomer.setFirst(customer.getFirst());
@@ -50,7 +50,7 @@ public class CustomerServices implements CustomerServicesImplementation {
 
     public boolean deleteCustomer(String id)
     {
-        customers customerOptional= customerRepository.findByCustomerId(id);
+        Customers customerOptional= customerRepository.findByCustomerId(id);
         if(customerOptional !=null)
         {
             customerRepository.deleteByCustomerId(id);
@@ -63,3 +63,4 @@ public class CustomerServices implements CustomerServicesImplementation {
 
 
 }
+

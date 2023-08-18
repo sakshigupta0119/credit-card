@@ -1,7 +1,7 @@
 package com.project.credit.card.controller;
 
 import com.project.credit.card.dto.*;
-import com.project.credit.card.entities.transactions;
+import com.project.credit.card.entities.Transactions;
 import com.project.credit.card.service.TransactionsServices;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -22,30 +22,30 @@ public class transactionsController {
     }
 
     @GetMapping("/user/{userId}")
-    public ResponseEntity<List<transactions>> getTransactionByUserId(@PathVariable String userId)
+    public ResponseEntity<List<Transactions>> getTransactionByUserId(@PathVariable String userId)
     {
-        List<transactions> transactions = TransactionsServices.getTransactionsByUserId(userId);
+        List<Transactions> transactions = TransactionsServices.getTransactionsByUserId(userId);
         return ResponseEntity.ok(transactions);
     }
 
     @GetMapping("/merchant/{merchant}")
-    public ResponseEntity<List<transactions>> getTransactionsByMerchant(@PathVariable String merchant)
+    public ResponseEntity<List<Transactions>> getTransactionsByMerchant(@PathVariable String merchant)
     {
-        List<transactions> transactions=transactionService.getTransactionsByMerchant(merchant);
+        List<Transactions> transactions=transactionService.getTransactionsByMerchant(merchant);
         return ResponseEntity.ok(transactions);
     }
 
     @GetMapping("/category/{spendingCategory}")
-    public ResponseEntity<List<transactions>> getTransactionsByCategory(@PathVariable String spendingCategory)
+    public ResponseEntity<List<Transactions>> getTransactionsByCategory(@PathVariable String spendingCategory)
     {
-        List<transactions> transactions= transactionService.getTransactionsBySpendingCategory(spendingCategory);
+        List<Transactions> transactions= transactionService.getTransactionsBySpendingCategory(spendingCategory);
         return ResponseEntity.ok(transactions);
     }
 
     @PostMapping
-    public ResponseEntity<transactions> createTransaction(@RequestBody transactions transaction)
+    public ResponseEntity<Transactions> createTransaction(@RequestBody Transactions transaction)
     {
-        transactions createdTransaction= transactionService.createTransaction(transaction);
+        Transactions createdTransaction= transactionService.createTransaction(transaction);
         return ResponseEntity.created(URI.create("/transactions/"+createdTransaction.getTrans_num())).body(createdTransaction);
     }
 
@@ -89,13 +89,13 @@ public class transactionsController {
     }
 
     @GetMapping("/spendingHistory/LowValueTransactions")
-    public List<transactions> getLowValueTransactions()
+    public List<Transactions> getLowValueTransactions()
     {
         return transactionService.getLowValueTransactions();
     }
 
     @GetMapping("/spendingHistory/HighValueTransactions")
-    public List<transactions> getHighValueTransactions()
+    public List<Transactions> getHighValueTransactions()
     {
         return transactionService.getHighValueTransactions();
     }

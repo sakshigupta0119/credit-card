@@ -6,7 +6,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.Objects;
 @Document(collection = "transactions")
-public class transactions {
+public class Transactions {
     @Id
     private long trans_num;
     private String gender;  // gender
@@ -17,18 +17,22 @@ public class transactions {
     private long city_population;  // population groups
     private Double amt;   // amount of spending (low value vs high value transactions)
 
-//    public transactions(long trans_num, String gender, String category, String merchant, String city, String state, long city_population, Double amt) {
-//        this.trans_num = trans_num;
-//        this.gender = gender;
-//        this.category = category;
-//        this.merchant = merchant;
-//        this.city = city;
-//        this.state = state;
-//        this.city_population = city_population;
-//        this.amt = amt;
-//    }
-    public transactions(long trans_num){
+    public Transactions(long trans_num, String gender, String category, String merchant, String city, String state, long city_population, Double amt) {
+        this.trans_num = trans_num;
+        this.gender = gender;
+        this.category = category;
+        this.merchant = merchant;
+        this.city = city;
+        this.state = state;
+        this.city_population = city_population;
+        this.amt = amt;
+    }
+    public Transactions(long trans_num){
         this.trans_num =trans_num;
+    }
+
+    public Transactions() {
+
     }
 
 
@@ -100,7 +104,7 @@ public class transactions {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        transactions that = (transactions) o;
+        Transactions that = (Transactions) o;
         return trans_num == that.trans_num && city_population == that.city_population && amt == that.amt && Objects.equals(gender, that.gender) && Objects.equals(category, that.category) && Objects.equals(merchant, that.merchant) && Objects.equals(city, that.city) && Objects.equals(state, that.state);
     }
 

@@ -1,6 +1,6 @@
 package com.project.credit.card.controller;
 
-import com.project.credit.card.entities.customers;
+import com.project.credit.card.entities.Customers;
 import com.project.credit.card.service.CustomerServices;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -22,27 +22,27 @@ public class CustomerController {
 
 
 @GetMapping("/gender/{gender}")
-    public ResponseEntity<List<customers>> getCustomerByGender(@PathVariable String gender){
-    List<customers> customer = customerService.getCustomerByGender(gender);
+    public ResponseEntity<List<Customers>> getCustomerByGender(@PathVariable String gender){
+    List<Customers> customer = customerService.getCustomerByGender(gender);
     return ResponseEntity.ok(customer);
 }
 
 @GetMapping("/occupation/{occupation}")
-    public ResponseEntity<List<customers>> getCustomerByOccupation(@PathVariable String occupation) {
-    List<customers> customer = customerService.getCustomerByOccupation(occupation);
+    public ResponseEntity<List<Customers>> getCustomerByOccupation(@PathVariable String occupation) {
+    List<Customers> customer = customerService.getCustomerByOccupation(occupation);
     return ResponseEntity.ok(customer);
     }
 
     @PostMapping
-    public ResponseEntity<customers> createCustomer(@RequestBody customers customer){
-    customers newCustomer = customerService.createCustomer(customer);
+    public ResponseEntity<Customers> createCustomer(@RequestBody Customers customer){
+    Customers newCustomer = customerService.createCustomer(customer);
     return ResponseEntity.created(URI.create("/customers/"+ newCustomer.getCustomerId())).body(newCustomer);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<customers> updateCustomer(@PathVariable String id, @RequestBody customers customer) {
+    public ResponseEntity<Customers> updateCustomer(@PathVariable String id, @RequestBody Customers customer) {
         System.out.println("Customer's ID: " + id);
-        customers changeCustomer = customerService.updateCustomer(id, customer);
+        Customers changeCustomer = customerService.updateCustomer(id, customer);
         if (changeCustomer == null) {
             ResponseEntity.notFound().build();
         }
