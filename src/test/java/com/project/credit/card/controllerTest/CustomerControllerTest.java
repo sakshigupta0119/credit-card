@@ -49,7 +49,7 @@ public class CustomerControllerTest {
     void testGetCustomerByOccupation() {
         String occupation = "Software";
         List<Customers> mockCustomers = new ArrayList<>();
-        mockCustomers.add(new Customers(1,"","Deepak","Gowda","M","Software",LocalDate.of(2000,02,28));
+        mockCustomers.add(new Customers(1,"","Deepak","Gowda","M","Software",LocalDate.of(2000,02,28)));
 
         when(customerService.getCustomerByOccupation(occupation)).thenReturn(mockCustomers);
 
