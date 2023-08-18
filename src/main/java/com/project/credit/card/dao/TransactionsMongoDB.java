@@ -72,9 +72,7 @@ public class TransactionsMongoDB {
         //System.out.println(result);
         return result;
     }
-
-    private SortOperation sort(Sort totalAmount) {
-    }
+    
 
     public List<SpendByMerchant> getSpendingHistoryByMerchant() {
 
